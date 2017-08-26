@@ -41,6 +41,11 @@ usuario_favorito = db.Table('usuario_favorito',
     db.Column('id_local', db.Integer, db.ForeignKey('local.id_local'))
 )
 
+categoria_subcategoria = db.Table("categoria_subcategoria",
+    db.Column("id_categoria", db.Integer, db.ForeignKey("categoria.id_categoria")),
+    db.Column("id_subcategoria", db.Integer, db.ForeignKey("subcategoria.id_subcategoria"), unique=True)
+)
+
 # Models and their simple relantionships -------------------------------------
 
 
@@ -91,18 +96,27 @@ class Estado(db.Model):
 
 class Cidade(db.Model):
     __tablename__ = 'cidade'
-    id_pais = db.Column(db.Integer, primary_key=True)
+    id_cidade = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80))
     sigla = db.Column(db.String(5))
 
     estado_id = db.Column(db.Integer, db.ForeignKey('estado.id_estado'))
     estado = db.relationship("Estado", back_populates="cidades")
 
+    locais = db.relationship("Local", back_populates="cidade")
 
 class Categoria(db.Model):
     __tablename__ = 'categoria'
     id_categoria = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80))
+
+    locais = db.relationship("Local", back_populates="categoria")
+
+    subcategorias = db.relationship("Subcategoria",
+                                    secondary=categoria_subcategoria,
+                                    backref="categoria",
+                                    primaryjoin=id_categoria==categoria_subcategoria.c.id_categoria,
+                                    secondaryjoin=id_categoria==categoria_subcategoria.c.id_subcategoria)
 
     tipo = db.Column(db.String(30))
     __mapper_args__ = {'polymorphic_identity': __tablename__,
