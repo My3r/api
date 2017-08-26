@@ -46,6 +46,11 @@ categoria_subcategoria = db.Table("categoria_subcategoria",
     db.Column("id_subcategoria", db.Integer, db.ForeignKey("subcategoria.id_subcategoria"), unique=True)
 )
 
+agenda_local = db.Table("agenda_local",
+    db.Column("id_agenda", db.Integer, db.ForeignKey("agenda.id_agenda")),
+    db.Column("id_local", db.Integer, db.ForeignKey("local.id_local"))
+)
+
 # Models and their simple relantionships -------------------------------------
 
 
@@ -150,3 +155,21 @@ class Local(db.Model):
     categoria = db.relationship("Categoria", back_populates="locais")
 
 
+class Agenda(db.Model):
+    __tablename__ = 'agenda'
+    id_agenda = db.Column(db.Integer(), primary_key=True)
+    nome = db.Column(db.String(80))
+
+    data_inicio = db.Column(db.Date)
+    data_fim = db.Column(db.Date)
+
+    locais = db.relationship("Local",
+                            secondary=agenda_local,
+                            back_populates="agendas")
+
+    dono_id = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'))
+    dono = db.relationship("Usuario", back_populates="agendas")
+
+    colaboradores = db.relationship("Usuario",
+                            secondary=agenda_colaborador,
+                            back_populates="agendas_colaborando")
