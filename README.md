@@ -11,7 +11,7 @@
         - Tenha certeza de que seu Python3 tem o ```pip``` adequado a ele (no Linux, às vezes é pip3), com módulo ```virtualenv``` instalado
     - [MySQL](https://dev.mysql.com/downloads/installer/) recente
 - Prepare o ambiente virtual:
-    - Crie banco de dados chamado IntegraTI (com ```create database IntegraTI``` em um console do MySQL)
+    - Crie banco de dados chamado IntegraTI (com ```create database my3r``` em um console do MySQL)
     - Edite as variáveis de prefixo ```DB_``` no arquivo [config.py](./config.py) com os dados de instalação do seu MySQL
     - Crie um arquivo vazio ```logs/error.log```
     - Crie o ambiente virtual via console usando ```python -m venv env```
