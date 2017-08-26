@@ -126,7 +126,27 @@ class Subcategoria(Categoria):
     __tablename__ = 'subcategoria'
     id_subcategoria = db.Column(db.Integer, db.ForeignKey("categoria.id_categoria", ondelete="CASCADE"), primary_key=True)
 
-    id_pai = db.Column(db.Integer, db.ForeignKey("categoria.id_categoria", ondelete="CASCADE"), primary_key=True)
-
     __mapper_args__ = {'polymorphic_identity': __tablename__}
+
+
+class Local(db.Model):
+    __tablename__ = 'local'
+    id_local = db.Column(db.Integer(), primary_key=True)
+    nome = db.Column(db.String(80))
+    path_foto = db.Column(db.String(80))
+    descricao = db.Column(db.String(250))
+    endereco = db.Column(db.String(120))
+    lat = db.Column(db.Float(Precision=64))
+    lng = db.Column(db.Float(Precision=64))
+
+    agendas = db.relationship("Agenda",
+                            secondary=agenda_local,
+                            back_populates="locais")
+
+    cidade_id = db.Column(db.Integer, db.ForeignKey('cidade.id_cidade'))
+    cidade = db.relationship("Cidade", back_populates="locais")
+
+    categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id_categoria'))
+    categoria = db.relationship("Categoria", back_populates="locais")
+
 
