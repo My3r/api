@@ -31,6 +31,15 @@ from app import db
 #     )
 # )
 
+agenda_colaborador = db.Table('agenda_colaborador',
+    db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario')),
+    db.Column('id_agenda', db.Integer, db.ForeignKey('agenda.id_agenda'))
+)
+
+usuario_favorito = db.Table('usuario_favorito',
+    db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario')),
+    db.Column('id_local', db.Integer, db.ForeignKey('local.id_local'))
+)
 
 # Models and their simple relantionships -------------------------------------
 
@@ -39,8 +48,20 @@ class Usuario(db.Model):
     __tablename__ = 'usuario'
     id_usuario = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80))
+    path_foto = db.Column(db.String(80))
     email = db.Column(db.String(50), unique=True)
     senha = db.Column(db.String(64))
+
+    favoritos = db.relationship("Local",
+                            secondary=usuario_favorito,
+                            backref="favoritado_por")
+
+    agendas = db.relationship("Agenda", back_populates="dono")
+
+    agendas_colaborando = db.relationship("Agenda",
+                            secondary=agenda_colaborador,
+                            back_populates="colaboradores")
+
 
     tipo = db.Column(db.String(30))
     __mapper_args__ = {'polymorphic_identity': __tablename__,
