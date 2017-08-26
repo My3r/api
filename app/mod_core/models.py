@@ -78,7 +78,20 @@ class Cidade(db.Model):
     estado = db.relationship("Estado", back_populates="cidades")
 
 
+class Categoria(db.Model):
+    __tablename__ = 'categoria'
+    id_categoria = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(80))
+
+    tipo = db.Column(db.String(30))
+    __mapper_args__ = {'polymorphic_identity': __tablename__,
+                       'polymorphic_on': tipo}
+
+class Subcategoria(Categoria):
+    __tablename__ = 'subcategoria'
+    id_subcategoria = db.Column(db.Integer, db.ForeignKey("categoria.id_categoria", ondelete="CASCADE"), primary_key=True)
+
+    id_pai = db.Column(db.Integer, db.ForeignKey("categoria.id_categoria", ondelete="CASCADE"), primary_key=True)
+
     __mapper_args__ = {'polymorphic_identity': __tablename__}
 
-    def __init__(self, nome, email, senha):
-        Usuario.__init__(self, nome, email, senha)
