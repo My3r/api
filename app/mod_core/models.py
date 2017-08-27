@@ -101,6 +101,9 @@ class Pais(db.Model):
 
     cidades = db.relationship("Cidade", back_populates="pais")
 
+    def __str__(self):
+        return self.nome
+
 
 class Cidade(db.Model):
     __tablename__ = 'cidade'
@@ -113,6 +116,8 @@ class Cidade(db.Model):
 
     locais = db.relationship("Local", back_populates="cidade")
 
+    def __str__(self):
+        return self.nome
 
 class Tag(db.Model):
     __tablename__ = 'tag'
@@ -127,7 +132,7 @@ class Local(db.Model):
     id_local = db.Column(db.Integer(), primary_key=True)
     nome = db.Column(db.String(80))
     path_foto = db.Column(db.String(80))
-    descricao = db.Column(db.String(300))
+    descricao = db.Column(db.String(500))
     endereco = db.Column(db.String(120))
     lat = db.Column(db.Float(Precision=64))
     lng = db.Column(db.Float(Precision=64))
