@@ -90,7 +90,8 @@ class Interacao(db.Model):
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), primary_key=True)
     local_id = db.Column(db.Integer, db.ForeignKey('local.id_local'), primary_key=True)
     like = db.Column(db.Boolean)
-    child = db.relationship("Local")
+    data = db.Column(db.Date)
+    local = db.relationship("Local")
 
 
 class Pais(db.Model):
