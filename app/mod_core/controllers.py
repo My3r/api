@@ -31,7 +31,10 @@ local_m = ns.model('local', {
     'endereço': fields.String,
     'path_foto': fields.String,
     'lat': fields.Float,
-    'lng': fields.Float
+    'lng': fields.Float,
+    'instagram_1': fields.String,
+    'instagram_2': fields.String,
+    'instagram_3': fields.String
 })
 local_m_expect = ns.model('local', {
     'nome': fields.String,
@@ -39,7 +42,10 @@ local_m_expect = ns.model('local', {
     'endereço': fields.String,
     'path_foto': fields.String,
     'lat': fields.Float,
-    'lng': fields.Float
+    'lng': fields.Float,
+    'instagram_1': fields.String,
+    'instagram_2': fields.String,
+    'instagram_3': fields.String
 })
 
 tag_m = ns.model('tag', {
@@ -96,7 +102,9 @@ class UsuarioPostController(Resource):
     def post(self):
         """Cria um novo usuário"""
         us = Usuario()
-        fill_object(us, request.json)
+        # request = request
+        json = request.json
+        fill_object(us, json)
         db.session.add(us)
         try:
             db.session.commit()
@@ -106,25 +114,25 @@ class UsuarioPostController(Resource):
         return msg(us.id_usuario, 'id')
 
 
-@ns.route('/local/<int:id>')
+@ns.route('/local/<int:id_local>')
 @ns.response(404, 'Não encontrado')
 class LocalController(Resource):
     @ns.marshal_with(local_m)
     @ns.response(200, 'Retorna o model local no corpo da resposta')
-    def get(self, id):
+    def get(self, id_local):
         """Retorna um local pelo ID"""
         lc = Local.query \
-            .filter(Local.id_local == id) \
+            .filter(Local.id_local == id_local) \
             .first()
         abort_if_none(lc, 404, 'Não achado')
         return lc
 
     @ns.response(200, 'Local atualizado')
     @ns.expect(local_m_expect)
-    def put(self, id):
+    def put(self, id_local):
         """Atualiza um local pelo ID"""
         lc = Local.query \
-            .filter(Local.id_local == id) \
+            .filter(Local.id_local == id_local) \
             .first()
         abort_if_none(lc, 404, 'Não achado')
 
@@ -133,6 +141,16 @@ class LocalController(Resource):
 
         return msg('success!')
 
+    @ns.response(200, 'Local deletado')
+    def delete(self, id_local):
+        """Delete um local ID's"""
+        lc = Local.query \
+            .filter(Local.id_local == id_local) \
+            .first()
+        abort_if_none(lc, 404, 'Não achado')
+        db.session.delete(lc)
+        db.session.commit()
+        return msg('success!')
 
 @ns.route('/local')
 class LocalPostController(Resource):
