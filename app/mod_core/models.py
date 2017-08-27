@@ -76,11 +76,21 @@ class Usuario(db.Model):
                              secondary=usuario_tag,
                              backref='interessados')
 
+    interacoes = db.relationship("Interacao")
+
     agendas = db.relationship("Agenda", back_populates="dono")
 
     agendas_colaborando = db.relationship("Agenda",
                             secondary=agenda_colaborador,
                             back_populates="colaboradores")
+
+
+class Interacao(db.Model):
+    __tablename__ = 'interacao'
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), primary_key=True)
+    local_id = db.Column(db.Integer, db.ForeignKey('local.id_local'), primary_key=True)
+    like = db.Column(db.Boolean)
+    child = db.relationship("Local")
 
 
 class Pais(db.Model):
