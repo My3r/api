@@ -25,27 +25,29 @@ user_m_expect = ns.model('usario', {
     'senha': fields.String
 })
 
+@ns.route('/usuario/<int:id>')
+@ns.response(403, 'Usuário não tem permissão')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
 class UserController(Resource):
     @ns.marshal_with(user_m)
     @ns.response(200, 'Returns the user model on the body of the response')
     def get(self, id):
         """Get an user by ID"""
-        us = User.query \
-            .filter(User.disabled == 0) \
-            .filter(User.id_user == id) \
+        us = Usuario.query \
+            .filter(Usuario.id_usuario == id) \
             .first()
-        abort_if_none(us, 404, 'not found')
+        abort_if_none(us, 404, 'Não achado')
         return us
 
-    @ns.response(200, 'User updated')
+    @ns.response(200, 'Usuario atualizado')
     @ns.expect(user_m_expect)
     def put(self, id):
         """Update an user by ID"""
-        us = User.query\
-            .filter(User.disabled == 0)\
-            .filter(User.id_user == id)\
+        us = Usuario.query\
+            .filter(Usuario.id_usuario == id)\
             .first()
-        abort_if_none(us, 404, 'not found')
+        abort_if_none(us, 404, 'Não achado')
 
         fill_object(us, request.json)
         db.session.commit()
