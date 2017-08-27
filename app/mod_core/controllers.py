@@ -2,7 +2,7 @@ from flask import request, Blueprint
 from flask_restplus import Resource, Namespace, fields, abort
 
 from app import db
-from app.mod_core.models import Usuario, Local, Tag
+from app.mod_core.models import Usuario, Local, Tag, Interacao
 from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
@@ -50,9 +50,15 @@ tag_m_expect = ns.model('tag', {
     'nome': fields.String
 })
 
+interacao_m = ns.model('tag', {
+    'usuario_id': fields.Integer,
+    'local_id': fields.Integer,
+    'like': fields.Boolean,
+    'data': fields.Date
+})
+
 
 @ns.route('/usuario/<int:id>')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class UsuarioController(Resource):
     @ns.marshal_with(user_m)
@@ -81,6 +87,7 @@ class UsuarioController(Resource):
 
 
 @ns.route('/usuario/')
+@ns.response(404, 'Erro')
 class UsuarioPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de usuarios com o critério passado', user_m)
@@ -107,8 +114,6 @@ class UsuarioPostController(Resource):
 
 
 @ns.route('/usuario/<int:id>/tag/')
-@ns.response(400, 'ID não é inteiro')
-@ns.response(404, 'Não encontrado')
 class UsuarioTagController(Resource):
     @ns.marshal_with(tag_m)
     @ns.response(200, 'Lista de tags de interesse de um usuario é retornada')
@@ -120,8 +125,6 @@ class UsuarioTagController(Resource):
 
 
 @ns.route('/usuario/<int:id_u>/tag/<int:id_t>')
-@ns.response(400, 'ID não é inteiro')
-@ns.response(404, 'Não encontrado')
 class UsuarioTagController(Resource):
     @ns.response(200, 'Adiciona uma tag como interesse de um usuario')
     def post(self, id_u, id_t):
@@ -146,8 +149,35 @@ class UsuarioTagController(Resource):
         return msg('Sucesso!')
 
 
+@ns.route('/usuario/<int:id>/interacao')
+class InteracaoController(Resource):
+    @ns.marshal_with(interacao_m)
+    @ns.response(200, 'lista de interações do usuário é retornada')
+    def get(self, id):
+        """Retorna a lista das interacoes de uma pessoa pelo ID"""
+        interacoes = Interacao.query.filter_by(usuario_id=id).all()
+        abort_if_none(interacoes, 404, 'Não achado')
+        return interacoes
+
+
+@ns.route('/usuario/interacao')
+@ns.response(404, 'Erro')
+class InteracaoController(Resource):
+    @ns.expect(interacao_m)
+    @ns.response(200, 'Cadastra interação de um usuário com um local')
+    def post(self):
+        """Cria uma nova interação entre um usuário e um local"""
+        i = Interacao()
+        fill_object(i, request.json)
+        db.session.add(i)
+        try:
+            db.session.commit()
+        except Exception as e:
+            abort(404, e.__str__())
+        return msg('Sucesso!')
+
+
 @ns.route('/local/<int:id>')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class LocalController(Resource):
     @ns.marshal_with(local_m)
@@ -177,15 +207,13 @@ class LocalController(Resource):
 
 @ns.route('/local/')
 class LocalPostController(Resource):
-    @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
     @ns.marshal_with(local_m)
     def get(self):
         """Retorna uma lista locais"""
         return Local.query.all()
 
-    @ns.response(404, 'Erro inesperado')
-    @ns.response(400, 'O modelo está mal formado')
+    @ns.response(404, 'Erro')
     @ns.response(200, 'Local inserido')
     @ns.expect(local_m_expect)
     def post(self):
@@ -202,7 +230,6 @@ class LocalPostController(Resource):
 
 
 @ns.route('/tag/<int:id>')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class TagController(Resource):
     @ns.marshal_with(tag_m)
@@ -232,7 +259,6 @@ class TagController(Resource):
 
 @ns.route('/tag/')
 class TagPostController(Resource):
-    @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', tag_m)
     @ns.marshal_with(tag_m)
     def get(self):
@@ -240,7 +266,6 @@ class TagPostController(Resource):
         return Tag.query.all()
 
     @ns.response(404, 'Erro inesperado')
-    @ns.response(400, 'O modelo está mal formado')
     @ns.response(200, 'Tag inserido')
     @ns.expect(tag_m_expect)
     def post(self):
@@ -257,7 +282,6 @@ class TagPostController(Resource):
 
 
 @ns.route('/cidade/<int:id>')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class CidadeController(Resource):
     @ns.marshal_with(local_m)
@@ -272,7 +296,6 @@ class CidadeController(Resource):
 
 
 @ns.route('/local/<int:id>/tag/')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class LocalTagController(Resource):
     @ns.marshal_with(tag_m)
@@ -285,7 +308,6 @@ class LocalTagController(Resource):
 
 
 @ns.route('/local/<int:id_l>/tag/<int:id_t>')
-@ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class LocalTagController(Resource):
     @ns.response(200, 'Uma tag é adicionada a um local')
