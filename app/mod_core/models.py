@@ -117,7 +117,7 @@ class Cidade(db.Model):
 class Tag(db.Model):
     __tablename__ = 'tag'
     id_tag = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(35))
+    nome = db.Column(db.String(35), unique=True)
 
 
 class Local(db.Model):
