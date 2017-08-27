@@ -41,9 +41,14 @@ usuario_favorito = db.Table('usuario_favorito',
     db.Column('id_local', db.Integer, db.ForeignKey('local.id_local'))
 )
 
-categoria_subcategoria = db.Table("categoria_subcategoria",
-    db.Column("id_categoria", db.Integer, db.ForeignKey("categoria.id_categoria")),
-    db.Column("id_subcategoria", db.Integer, db.ForeignKey("subcategoria.id_subcategoria"), unique=True)
+usuario_tag = db.Table('usuario_tag',
+    db.Column('id_usuario', db.Integer, db.ForeignKey('usuario.id_usuario')),
+    db.Column('id_tag', db.Integer, db.ForeignKey('tag.id_tag'))
+)
+
+local_tag = db.Table('local_tag',
+    db.Column('id_local', db.Integer, db.ForeignKey('local.id_local')),
+    db.Column('id_tag', db.Integer, db.ForeignKey('tag.id_tag'))
 )
 
 agenda_local = db.Table("agenda_local",
@@ -61,11 +66,15 @@ class Usuario(db.Model):
     data_nascimento = db.Column(db.Date)
     path_foto = db.Column(db.String(80))
     email = db.Column(db.String(50), unique=True)
-    senha = db.Column(db.String(64))
+    oauth_instagram = db.Column(db.String(80))
 
     favoritos = db.relationship("Local",
                             secondary=usuario_favorito,
                             backref="favoritado_por")
+
+    interesses = db.relationship("Tag",
+                             secondary=usuario_tag,
+                             backref='interessados')
 
     agendas = db.relationship("Agenda", back_populates="dono")
 
@@ -106,28 +115,11 @@ class Cidade(db.Model):
 
     locais = db.relationship("Local", back_populates="cidade")
 
-class Categoria(db.Model):
-    __tablename__ = 'categoria'
-    id_categoria = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(80))
 
-    locais = db.relationship("Local", back_populates="categoria")
-
-    subcategorias = db.relationship("Subcategoria",
-                                    secondary=categoria_subcategoria,
-                                    backref="categoria",
-                                    primaryjoin=id_categoria==categoria_subcategoria.c.id_categoria,
-                                    secondaryjoin=id_categoria==categoria_subcategoria.c.id_subcategoria)
-
-    tipo = db.Column(db.String(30))
-    __mapper_args__ = {'polymorphic_identity': __tablename__,
-                       'polymorphic_on': tipo}
-
-class Subcategoria(Categoria):
-    __tablename__ = 'subcategoria'
-    id_subcategoria = db.Column(db.Integer, db.ForeignKey("categoria.id_categoria", ondelete="CASCADE"), primary_key=True)
-
-    __mapper_args__ = {'polymorphic_identity': __tablename__}
+class Tag(db.Model):
+    __tablename__ = 'tag'
+    id_tag = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(35))
 
 
 class Local(db.Model):
@@ -135,7 +127,7 @@ class Local(db.Model):
     id_local = db.Column(db.Integer(), primary_key=True)
     nome = db.Column(db.String(80))
     path_foto = db.Column(db.String(80))
-    descricao = db.Column(db.String(250))
+    descricao = db.Column(db.String(300))
     endereco = db.Column(db.String(120))
     lat = db.Column(db.Float(Precision=64))
     lng = db.Column(db.Float(Precision=64))
@@ -147,8 +139,9 @@ class Local(db.Model):
     cidade_id = db.Column(db.Integer, db.ForeignKey('cidade.id_cidade'))
     cidade = db.relationship("Cidade", back_populates="locais")
 
-    categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id_categoria'))
-    categoria = db.relationship("Categoria", back_populates="locais")
+    tags = db.relationship("Tag",
+                            secondary="local_tag",
+                            backref="locais")
 
 
 class Agenda(db.Model):
