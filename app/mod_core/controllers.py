@@ -79,7 +79,7 @@ class UsuarioController(Resource):
         return msg('success!')
 
 
-@ns.route('/usuario/')
+@ns.route('/usuario')
 @ns.response(404, 'Erro')
 class UsuarioPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
@@ -134,7 +134,7 @@ class LocalController(Resource):
         return msg('success!')
 
 
-@ns.route('/local/')
+@ns.route('/local')
 class LocalPostController(Resource):
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
     @ns.marshal_with(local_m)
@@ -186,7 +186,7 @@ class TagController(Resource):
         return msg('success!')
 
 
-@ns.route('/tag/')
+@ns.route('/tag')
 class TagPostController(Resource):
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', tag_m)
     @ns.marshal_with(tag_m)

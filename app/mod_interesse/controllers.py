@@ -16,36 +16,36 @@ tag_m = ns.model('tag', {
 })
 
 
-@ns.route('/usuario/<int:id>/tag/')
+@ns.route('/<int:id_usuario>')
 class UsuarioTagController(Resource):
     @ns.marshal_with(tag_m)
     @ns.response(200, 'Lista de tags de interesse de um usuario é retornada')
-    def get(self, id):
+    def get(self, id_usuario):
         """Retorna a lista das tags de interesse de uma pessoa pelo ID"""
-        usuario = Usuario.query.filter_by(id_usuario=id).first()
+        usuario = Usuario.query.filter_by(id_usuario=id_usuario).first()
         abort_if_none(usuario, 404, 'Não achado')
         return usuario.interesses
 
 
-@ns.route('/usuario/<int:id_u>/tag/<int:id_t>')
+@ns.route('/<int:id_usuario>/tag/<int:id_tag>')
 class UsuarioTagController(Resource):
     @ns.response(200, 'Adiciona uma tag como interesse de um usuario')
-    def post(self, id_u, id_t):
+    def post(self, id_usuario, id_tag):
         """Adiciona uma tag como interesse de um usuario pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
+        tag = Tag.query.filter_by(id_tag=id_tag).first()
         abort_if_none(tag, 404, 'Não achado')
-        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
+        usuario = Usuario.query.filter_by(id_usuario=id_usuario).first()
         abort_if_none(usuario, 404, 'Não achado')
         usuario.interesses.append(tag)
         db.session.commit()
         return msg('Sucesso!')
 
     @ns.response(200, 'Uma tag é removida do interesse de um usuario')
-    def delete(self, id_u, id_t):
+    def delete(self, id_usuario, id_tag):
         """Remove uma tag de interesse de um usuario pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
+        tag = Tag.query.filter_by(id_tag=id_tag).first()
         abort_if_none(tag, 404, 'Não achado')
-        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
+        usuario = Usuario.query.filter_by(id_usuario=id_usuario).first()
         abort_if_none(usuario, 404, 'Não achado')
         usuario.interesses.remove(tag)
         db.session.commit()

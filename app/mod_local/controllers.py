@@ -40,7 +40,7 @@ class CidadeController(Resource):
         return ls
 
 
-@ns.route('/<int:id_local>/tag/')
+@ns.route('/<int:id_local>')
 @ns.response(404, 'Não encontrado')
 class LocalTagController(Resource):
     @ns.marshal_with(tag_m)

@@ -18,32 +18,32 @@ interacao_m = ns.model('interacao', {
 })
 
 
-@ns.route('/usuario/<int:id>/interacao')
+@ns.route('/<int:id_usuario>')
 @ns.response(404, 'Não encontrado')
 class InteracaoController(Resource):
     @ns.marshal_with(interacao_m)
     @ns.response(200, 'Lista de interações do usuário é retornada')
-    def get(self, id):
+    def get(self, id_usuario):
         """Retorna a lista das interacoes de uma pessoa pelo ID"""
-        interacoes = Interacao.query.filter_by(usuario_id=id).all()
+        interacoes = Interacao.query.filter_by(usuario_id=id_usuario).all()
         abort_if_none(interacoes, 404, 'Não achado')
         return interacoes
 
 
-@ns.route('/usuario/<int:id_u>/interacao/<int:id_l>')
+@ns.route('/<int:id_usuario>/local/<int:id_local>')
 @ns.response(404, 'Não encontrado')
 class InteracaoController(Resource):
     @ns.response(200, 'Deleta interação entre um usuário e um local')
-    def delete(self, id_u, id_l):
+    def delete(self, id_usuario, id_local):
         """Delete uma interação entre uma pessoa e um local pelos ID's"""
-        interacao = Interacao.query.filter(Interacao.usuario_id==id_u).filter(Interacao.local_id).first()
+        interacao = Interacao.query.filter(Interacao.usuario_id==id_usuario).filter(Interacao.local_id==id_local).first()
         abort_if_none(interacao, 404, 'Não achado')
         db.session.delete(interacao)
         db.session.commit()
         return msg('success!')
 
 
-@ns.route('/usuario/interacao')
+@ns.route('')
 @ns.response(404, 'Erro')
 class InteracaoController(Resource):
     @ns.expect(interacao_m)
