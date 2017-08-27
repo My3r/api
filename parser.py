@@ -4,9 +4,10 @@ import csv
 
 locais = []
 locais2 = []
-cols = ['nome', 'descricao', 'lat', 'lng', 'tags']
+locais3 = []
 tmp = []
 tmp2 = []
+tmp3 = []
 
 with open("Local - Natal.csv", 'r', encoding='utf-8') as f:
     records = csv.DictReader(f)
@@ -60,8 +61,8 @@ tags = sorted(set(tags))
 for tag in tags:
     t = Tag()
     t.nome = tag
-    db.session.add(t)
-db.session.commit()
+    # db.session.add(t)
+# db.session.commit()
 
 
 
@@ -75,8 +76,8 @@ for local in locais:
     for tag in local['tags']:
         l.tags.append(Tag.query.filter_by(nome=tag).first())
 
-    db.session.add(l)
-db.session.commit()
+    # db.session.add(l)
+# db.session.commit()
 
 pais_cidade = []
 
@@ -94,8 +95,8 @@ for tupla in pais_cidade:
     c = Cidade()
     c.nome = tupla[0]
     p.cidades.append(c)
-    db.session.add(p)
-db.session.commit()
+    # db.session.add(p)
+# db.session.commit()
 
 for local in locais2:
     l = Local()
@@ -107,5 +108,37 @@ for local in locais2:
     for tag in local['tags']:
         l.tags.append(Tag.query.filter_by(nome=tag).first())
 
-    db.session.add(l)
-db.session.commit()
+    # db.session.add(l)
+# db.session.commit()
+
+
+with open("Local - Religioso.csv", 'r', encoding='utf-8') as f:
+    records = csv.DictReader(f)
+    for row in records:
+         tmp3.append(row)
+
+for local in tmp3:
+    x = dict()
+    x['cidade'] = 'Natal'
+    x['nome'] = local['nome']
+    x['descricao'] = local['descricao']
+    x['lat'] = local['lat']
+    x['lng'] = local['lng']
+    x['tags'] = local['tags'].split('#')
+    del(x['tags'][0])
+    for i in range(0, len(x['tags'])):
+        x['tags'][i] = x['tags'][i].strip().lower()
+    locais3.append(x)
+
+for local in locais3:
+    l = Local()
+    l.cidade = Cidade.query.filter_by(nome=local['cidade']).first()
+    l.nome = local['nome']
+    l.descricao = local['descricao']
+    l.lat = (float(local['lat'].replace(',',''))/10)
+    l.lng = (float(local['lng'].replace(',',''))/100)
+    for tag in local['tags']:
+        l.tags.append(Tag.query.filter_by(nome=tag).first())
+
+    # db.session.add(l)
+# db.session.commit()
