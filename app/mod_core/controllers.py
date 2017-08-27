@@ -258,3 +258,32 @@ class CidadeController(Resource):
             .all()
         abort_if_none(ls, 404, 'Não achado')
         return ls
+
+
+@ns.route('/local/<int:id>/tag/')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
+class LocalTagController(Resource):
+    @ns.marshal_with(tag_m)
+    @ns.response(200, 'Lista de tags de um local é retornada')
+    def get(self, id):
+        """Retorna a lista das tags de um local pelo ID"""
+        local = Local.query.filter_by(id_local=id).first()
+        abort_if_none(local, 404, 'Não achado')
+        return local.tags
+
+
+@ns.route('/local/<int:id_l>/tag/<int:id_t>')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
+class LocalTagController(Resource):
+    @ns.response(200, 'Uma tag é adicionada a um local')
+    def post(self, id_l, id_t):
+        """Adiciona uma tag a um local pelos ID's"""
+        tag = Tag.query.filter_by(id_tag=id_t).first()
+        abort_if_none(tag, 404, 'Não achado')
+        local = Local.query.filter_by(id_local=id_l).first()
+        abort_if_none(local, 404, 'Não achado')
+        local.tags.append(tag)
+        db.session.commit()
+        return msg(local.id_local, 'id_local')
