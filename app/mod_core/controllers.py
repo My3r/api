@@ -55,7 +55,6 @@ tag_m_expect = ns.model('tag', {
 
 
 @ns.route('/usuario/<int:id>')
-@ns.response(403, 'Usuário não tem permissão')
 @ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class UsuarioController(Resource):
@@ -85,7 +84,6 @@ class UsuarioController(Resource):
 
 
 @ns.route('/usuario/')
-@ns.response(403, 'Usuário não tem permissão')
 class UsuarioPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de usuarios com o critério passado', user_m)
@@ -111,8 +109,36 @@ class UsuarioPostController(Resource):
         return msg(us.id_usuario, 'id')
 
 
+@ns.route('/usuario/<int:id>/tag/')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
+class UsuarioTagController(Resource):
+    @ns.marshal_with(tag_m)
+    @ns.response(200, 'Lista de tags de interesse de um usuario é retornada')
+    def get(self, id):
+        """Retorna a lista das tags de interesse de uma pessoa pelo ID"""
+        usuario = Usuario.query.filter_by(id_usuario=id).first()
+        abort_if_none(usuario, 404, 'Não achado')
+        return usuario.interesses
+
+
+@ns.route('/usuario/<int:id_u>/tag/<int:id_t>')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
+class UsuarioTagController(Resource):
+    @ns.response(200, 'Adiciona uma tag como interesse de um usuario')
+    def post(self, id_u, id_t):
+        """Adiciona uma tag como interesse de um usuario pelos ID's"""
+        tag = Tag.query.filter_by(id_tag=id_t).first()
+        abort_if_none(tag, 404, 'Não achado')
+        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
+        abort_if_none(usuario, 404, 'Não achado')
+        usuario.interesses.append(tag)
+        db.session.commit()
+        return msg(usuario.id_usuario, 'id_usuario')
+
+
 @ns.route('/local/<int:id>')
-@ns.response(403, 'Usuário não tem permissão')
 @ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class LocalController(Resource):
@@ -141,7 +167,6 @@ class LocalController(Resource):
         return msg('success!')
 
 @ns.route('/local/')
-@ns.response(403, 'Usuário não tem permissão')
 class LocalPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
@@ -168,7 +193,6 @@ class LocalPostController(Resource):
 
 
 @ns.route('/tag/<int:id>')
-@ns.response(403, 'Usuário não tem permissão')
 @ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class TagController(Resource):
@@ -197,7 +221,6 @@ class TagController(Resource):
         return msg('success!')
 
 @ns.route('/tag/')
-@ns.response(403, 'Usuário não tem permissão')
 class TagPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', tag_m)
@@ -223,7 +246,6 @@ class TagPostController(Resource):
         return msg(tg.id_tag, 'id')
 
 @ns.route('/cidade/<int:id>')
-@ns.response(403, 'Usuário não tem permissão')
 @ns.response(400, 'ID não é inteiro')
 @ns.response(404, 'Não encontrado')
 class CidadeController(Resource):
