@@ -89,19 +89,7 @@ class Pais(db.Model):
     nome = db.Column(db.String(80))
     sigla = db.Column(db.String(4))
 
-    estados = db.relationship("Estado", back_populates="pais")
-
-
-class Estado(db.Model):
-    __tablename__ = 'estado'
-    id_estado = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(80))
-    uf = db.Column(db.String(4))
-
-    pais_id = db.Column(db.Integer, db.ForeignKey('pais.id_pais'))
-    pais = db.relationship("Pais", back_populates="estados")
-
-    cidades = db.relationship("Cidade", back_populates="estado")
+    cidades = db.relationship("Cidade", back_populates="pais")
 
 
 class Cidade(db.Model):
@@ -110,8 +98,8 @@ class Cidade(db.Model):
     nome = db.Column(db.String(80))
     sigla = db.Column(db.String(5))
 
-    estado_id = db.Column(db.Integer, db.ForeignKey('estado.id_estado'))
-    estado = db.relationship("Estado", back_populates="cidades")
+    pais_id = db.Column(db.Integer, db.ForeignKey('pais.id_pais'))
+    pais = db.relationship("Pais", back_populates="cidades")
 
     locais = db.relationship("Local", back_populates="cidade")
 
