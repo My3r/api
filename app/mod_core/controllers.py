@@ -231,8 +231,8 @@ class CidadeController(Resource):
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
     def get(self, id):
         """Retorna uma lista de locais de uma cidade pelo ID"""
-        c = Cidade.query \
-            .filter(Cidade.id_cidade == id) \
-            .first()
-        abort_if_none(c, 404, 'Não achado')
-        return c.locais
+        ls = Local.query \
+            .filter(Local.cidade_id == id) \
+            .all()
+        abort_if_none(ls, 404, 'Não achado')
+        return ls
