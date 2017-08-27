@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash
 import sys
 
 from app import db
-from app.mod_core.models import Usuario, Local, Tag
+from app.mod_core.models import Usuario, Local, Tag, Cidade
 from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
@@ -221,3 +221,18 @@ class TagPostController(Resource):
             abort(404, e.__str__())
 
         return msg(tg.id_tag, 'id')
+
+@ns.route('/cidade/<int:id>')
+@ns.response(403, 'Usuário não tem permissão')
+@ns.response(400, 'ID não é inteiro')
+@ns.response(404, 'Não encontrado')
+class CidadeController(Resource):
+    @ns.marshal_with(local_m)
+    @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
+    def get(self, id):
+        """Retorna uma lista de locais de uma cidade pelo ID"""
+        c = Cidade.query \
+            .filter(Cidade.id_cidade == id) \
+            .first()
+        abort_if_none(c, 404, 'Não achado')
+        return c.locais
