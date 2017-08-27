@@ -57,25 +57,25 @@ tag_m_expect = ns.model('tag', {
 })
 
 
-@ns.route('/usuario/<int:id>')
+@ns.route('/usuario/<int:id_usuario>')
 @ns.response(404, 'Não encontrado')
 class UsuarioController(Resource):
     @ns.marshal_with(user_m)
     @ns.response(200, 'Retorna o model usuario no corpo da resposta')
-    def get(self, id):
+    def get(self, id_usuario):
         """Retorna um usuário pelo ID"""
         us = Usuario.query \
-            .filter(Usuario.id_usuario == id) \
+            .filter(Usuario.id_usuario == id_usuario) \
             .first()
         abort_if_none(us, 404, 'Não achado')
         return us
 
     @ns.response(200, 'Usuario atualizado')
     @ns.expect(user_m_expect)
-    def put(self, id):
+    def put(self, id_usuario):
         """Atualiza um usuário pelo ID"""
         us = Usuario.query\
-            .filter(Usuario.id_usuario == id)\
+            .filter(Usuario.id_usuario == id_usuario)\
             .first()
         abort_if_none(us, 404, 'Não achado')
 
@@ -152,6 +152,7 @@ class LocalController(Resource):
         db.session.commit()
         return msg('success!')
 
+
 @ns.route('/local')
 class LocalPostController(Resource):
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
@@ -176,25 +177,25 @@ class LocalPostController(Resource):
         return msg(lc.id_local, 'id')
 
 
-@ns.route('/tag/<int:id>')
+@ns.route('/tag/<int:id_tag>')
 @ns.response(404, 'Não encontrado')
 class TagController(Resource):
     @ns.marshal_with(tag_m)
     @ns.response(200, 'Retorna o model tag no corpo da resposta')
-    def get(self, id):
+    def get(self, id_tag):
         """Retorna uma tag pelo ID"""
         tg = Tag.query \
-            .filter(Tag.id_tag == id) \
+            .filter(Tag.id_tag == id_tag) \
             .first()
         abort_if_none(tg, 404, 'Não achado')
         return tg
 
     @ns.response(200, 'Tag atualizada')
     @ns.expect(tag_m_expect)
-    def put(self, id):
+    def put(self, id_tag):
         """Atualiza uma tag pelo ID"""
         tg = Tag.query \
-            .filter(Tag.id_tag == id) \
+            .filter(Tag.id_tag == id_tag) \
             .first()
         abort_if_none(tg, 404, 'Não achado')
 
@@ -226,3 +227,21 @@ class TagPostController(Resource):
             abort(404, e.__str__())
 
         return msg(tg.id_tag, 'id')
+
+
+@ns.route('/usuario/<int:id_usuario>/limpar')
+@ns.response(404, 'Não encontrado')
+class LimparUsuarioController(Resource):
+    @ns.response(200, 'Usuario resetado')
+    def delete(self, id_usuario):
+        """Limpa lista de interesses e interações do usuario pelo ID"""
+        us = Usuario.query \
+            .filter(Usuario.id_usuario == id_usuario) \
+            .first()
+        abort_if_none(us, 404, 'Não achado')
+        for interesse in us.interesses:
+            db.session.delete(interesse)
+        for interacao in us.interacoes:
+            db.session.delete(interacao)
+        db.session.commit()
+        return msg('success!')
