@@ -8,6 +8,7 @@ flask-restplus==0.10.1
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.2
 Flask-WTF==0.14.2
+gunicorn==19.7.1
 infinity==1.4
 intervals==0.8.0
 itsdangerous==0.24
@@ -15,6 +16,8 @@ Jinja2==2.9.6
 jsonschema==2.6.0
 Mako==1.0.6
 MarkupSafe==1.0
+numpy==1.13.1
+pandas==0.20.3
 passlib==1.7.1
 PyMySQL==0.7.11
 python-dateutil==2.6.1
