@@ -10,7 +10,7 @@ mod_local = Blueprint('local', __name__, url_prefix='/local')
 ns = Namespace('local', 'Operações de local e processamento')
 
 
-local_m = ns.model('local', {
+local_m_t = ns.model('local', {
     'id_local': fields.Integer,
     'nome': fields.String,
     'descricao': fields.String,
@@ -20,7 +20,8 @@ local_m = ns.model('local', {
     'lng': fields.Float,
     'instagram_1': fields.String,
     'instagram_2': fields.String,
-    'instagram_3': fields.String
+    'instagram_3': fields.String,
+    'tags': fields.List(fields.String)
 })
 
 tag_m = ns.model('tag', {
@@ -32,8 +33,8 @@ tag_m = ns.model('tag', {
 @ns.route('/cidade/<int:id_cidade>')
 @ns.response(404, 'Não encontrado')
 class CidadeController(Resource):
-    @ns.marshal_with(local_m)
-    @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
+    @ns.marshal_with(local_m_t)
+    @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m_t)
     def get(self, id_cidade):
         """Retorna uma lista de locais de uma cidade pelo ID"""
         ls = Local.query \
@@ -85,7 +86,7 @@ class LocalTagController(Resource):
 @ns.route('/cidade/<int:id_cidade>/usuario/<int:id_usuario>')
 @ns.response(404, 'Não encontrado')
 class LocalInteresseController(Resource):
-    @ns.marshal_with(local_m)
+    @ns.marshal_with(local_m_t)
     @ns.response(200, 'Lista de locais ordenado decrescente por interesse do usuário')
     def get(self, id_cidade, id_usuario):
         """Retorna lista de locais ordenado por quantidade de tags de interesse do usuário"""
@@ -103,7 +104,7 @@ class LocalInteresseController(Resource):
         tags_complementares = []
         for i in range(0, len(locais_disponiveis)):
             tags_complementares.append([tag for tag in locais_disponiveis[i].tags if tag not in usuario.interesses])
-            print(locais_disponiveis[i])
+            # print(locais_disponiveis[i])
 
         for i in range(0, len(locais_disponiveis)):
             locais_disponiveis[i].tags = [tag for tag in locais_disponiveis[i].tags if tag not in tags_complementares[i]]
