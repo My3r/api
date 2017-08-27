@@ -1,11 +1,8 @@
-from flask import request, g, Blueprint
+from flask import request, Blueprint
 from flask_restplus import Resource, Namespace, fields, abort
-from werkzeug.security import check_password_hash
-
-import sys
 
 from app import db
-from app.mod_core.models import Usuario, Local, Tag, Cidade
+from app.mod_core.models import Usuario, Local, Tag
 from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
@@ -177,6 +174,7 @@ class LocalController(Resource):
 
         return msg('success!')
 
+
 @ns.route('/local/')
 class LocalPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
@@ -231,6 +229,7 @@ class TagController(Resource):
 
         return msg('success!')
 
+
 @ns.route('/tag/')
 class TagPostController(Resource):
     @ns.response(400, 'Um dos argumentos está mal formado')
@@ -255,6 +254,7 @@ class TagPostController(Resource):
             abort(404, e.__str__())
 
         return msg(tg.id_tag, 'id')
+
 
 @ns.route('/cidade/<int:id>')
 @ns.response(400, 'ID não é inteiro')
@@ -298,6 +298,7 @@ class LocalTagController(Resource):
         local.tags.append(tag)
         db.session.commit()
         return msg('Sucesso!')
+
 
     @ns.response(200, 'Uma tag é removida de um local')
     def delete(self, id_l, id_t):
