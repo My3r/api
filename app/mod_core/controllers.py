@@ -10,12 +10,21 @@ from app.utils import abort_if_none, fill_object, msg
 mod_core = Blueprint('core', __name__, url_prefix='/core')
 ns = Namespace('core', 'Operations related to core')
 
+user_m = ns.model('usuario', {
+    'id_usuario': fields.Integer,
+    'nome': fields.String,
+    'email': fields.String,
+    'data_nascimento': fields.Date,
+    'path_foto': fields.String
+})
+user_m_expect = ns.model('usario', {
+    'nome': fields.String,
+    'email': fields.String,
+    'data_nascimento': fields.Date,
+    'path_foto': fields.String,
+    'senha': fields.String
+})
 
-@ns.route('/user/<int:id>')
-@ns.response(403, 'User is not logged or not have permission')
-@ns.response(400, 'ID is not int')
-@ns.response(404, 'Not Found')
-@ns.header('Authorization', 'The authorization token')
 class UserController(Resource):
     @ns.marshal_with(user_m)
     @ns.response(200, 'Returns the user model on the body of the response')
