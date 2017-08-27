@@ -119,6 +119,8 @@ class Tag(db.Model):
     id_tag = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(35), unique=True)
 
+    def __str__(self):
+        return self.nome
 
 class Local(db.Model):
     __tablename__ = 'local'
