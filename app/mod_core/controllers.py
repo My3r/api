@@ -54,42 +54,30 @@ class UserController(Resource):
 
         return msg('success!')
 
-    @ns.response(200, 'User disabled on db')
-    def delete(self, id):
-        """Delete an user by ID"""
-        us = User.query.filter(User.disabled == 0)\
-            .filter(User.id_user == id)\
-            .first()
-        abort_if_none(us, 404, 'not found')
 
-        us.disabled = 1
-        db.session.commit()
-
-        return msg('disabled on db')
-
-
-@ns.route('/user/')
-@ns.response(403, 'User is not logged or not have permission')
-@ns.header('Authorization', 'The authorization token')
+@ns.route('/usuario/')
+@ns.response(403, 'Usuário não tem permissão')
 class UserPostController(Resource):
-    @ns.response(400, 'One of the arguments is malformed')
-    @ns.response(200, 'Return an list of users that matched criteria', user_m)
+    @ns.response(400, 'Um dos argumentos está mal formado')
+    @ns.response(200, 'Retorna uma lista de usuarios com o critério passado', user_m)
     @ns.marshal_with(user_m)
     def get(self):
         """Get a list of users"""
-        return User.query.filter(User.disabled == 0).all()
+        return Usuario.query.all()
 
-    @ns.response(400, 'The model is malformed')
-    @ns.response(200, 'User inserted')
+    @ns.response(404, 'Erro inesperado')
+    @ns.response(400, 'O modelo está mal formado')
+    @ns.response(200, 'Usuario inserido')
     @ns.expect(user_m_expect)
     def post(self):
         """Create a new user"""
-        us = User()
+        us = Usuario()
         fill_object(us, request.json)
         db.session.add(us)
-        db.session.commit()
-        return msg(us.id_user, 'id')
-
+        try:
+            db.session.commit()
+        except Exception as e:
+            abort(404, e.__str__())
 
 @ns.route('/user/resetpassword/')
 @ns.response(403, 'User is not logged, not have permission or the password is incorrect')
