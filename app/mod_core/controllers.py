@@ -135,7 +135,18 @@ class UsuarioTagController(Resource):
         abort_if_none(usuario, 404, 'Não achado')
         usuario.interesses.append(tag)
         db.session.commit()
-        return msg(usuario.id_usuario, 'id_usuario')
+        return msg('Sucesso!')
+
+    @ns.response(200, 'Uma tag é removida do interesse de um usuario')
+    def delete(self, id_u, id_t):
+        """Remove uma tag de interesse de um usuario pelos ID's"""
+        tag = Tag.query.filter_by(id_tag=id_t).first()
+        abort_if_none(tag, 404, 'Não achado')
+        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
+        abort_if_none(usuario, 404, 'Não achado')
+        usuario.interesses.remove(tag)
+        db.session.commit()
+        return msg('Sucesso!')
 
 
 @ns.route('/local/<int:id>')
@@ -286,4 +297,15 @@ class LocalTagController(Resource):
         abort_if_none(local, 404, 'Não achado')
         local.tags.append(tag)
         db.session.commit()
-        return msg(local.id_local, 'id_local')
+        return msg('Sucesso!')
+
+    @ns.response(200, 'Uma tag é removida de um local')
+    def delete(self, id_l, id_t):
+        """Remove uma tag de um local pelos ID's"""
+        tag = Tag.query.filter_by(id_tag=id_t).first()
+        abort_if_none(tag, 404, 'Não achado')
+        local = Local.query.filter_by(id_local=id_l).first()
+        abort_if_none(local, 404, 'Não achado')
+        local.tags.remove(tag)
+        db.session.commit()
+        return msg('Sucesso!')
