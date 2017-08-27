@@ -84,6 +84,9 @@ class Usuario(db.Model):
                             secondary=agenda_colaborador,
                             back_populates="colaboradores")
 
+    def __str__(self):
+        return self.nome
+
 
 class Interacao(db.Model):
     __tablename__ = 'interacao'
@@ -120,6 +123,7 @@ class Cidade(db.Model):
     def __str__(self):
         return self.nome
 
+
 class Tag(db.Model):
     __tablename__ = 'tag'
     id_tag = db.Column(db.Integer, primary_key=True)
@@ -127,6 +131,7 @@ class Tag(db.Model):
 
     def __str__(self):
         return self.nome
+
 
 class Local(db.Model):
     __tablename__ = 'local'
@@ -138,6 +143,10 @@ class Local(db.Model):
     lat = db.Column(db.Float(Precision=64))
     lng = db.Column(db.Float(Precision=64))
 
+    instagram_1 = db.Column(db.String(150))
+    instagram_2 = db.Column(db.String(150))
+    instagram_3 = db.Column(db.String(150))
+
     agendas = db.relationship("Agenda",
                             secondary=agenda_local,
                             back_populates="locais")
@@ -148,6 +157,9 @@ class Local(db.Model):
     tags = db.relationship("Tag",
                             secondary="local_tag",
                             backref="locais")
+
+    def __str__(self):
+        return self.nome
 
 
 class Agenda(db.Model):
