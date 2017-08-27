@@ -16,15 +16,9 @@ brasil.nome = 'Brasil'
 brasil.sigla = 'BR'
 db.session.add(brasil)
 
-rn = Estado()
-rn.nome = 'Rio Grande do Norte'
-rn.uf = 'RN'
-
-brasil.estados.append(rn)
-
 natal = Cidade()
 natal.nome = 'Natal'
 natal.sigla = 'NAT'
-rn.cidades.append(natal)
+brasil.cidades.append(natal)
 
 db.session.commit()
