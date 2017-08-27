@@ -1,9 +1,10 @@
 from flask import request, g, Blueprint
-from flask_restplus import Resource, Namespace
+from flask_restplus import Resource, Namespace, fields, abort
 from werkzeug.security import check_password_hash
 
 from app import db
-# from app.mod_core.models import User
+from app.mod_core.models import Usuario
+from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
 mod_core = Blueprint('core', __name__, url_prefix='/core')
