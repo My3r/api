@@ -7,7 +7,7 @@ from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
 mod_core = Blueprint('core', __name__, url_prefix='/core')
-ns = Namespace('core', 'Operations related to core')
+ns = Namespace('core', 'Operações core. CRUD de Usuario, Local e Tag')
 
 user_m = ns.model('usuario', {
     'id_usuario': fields.Integer,
@@ -48,13 +48,6 @@ tag_m = ns.model('tag', {
 })
 tag_m_expect = ns.model('tag', {
     'nome': fields.String
-})
-
-interacao_m = ns.model('tag', {
-    'usuario_id': fields.Integer,
-    'local_id': fields.Integer,
-    'like': fields.Boolean,
-    'data': fields.Date
 })
 
 
@@ -111,70 +104,6 @@ class UsuarioPostController(Resource):
             abort(404, e.__str__())
 
         return msg(us.id_usuario, 'id')
-
-
-@ns.route('/usuario/<int:id>/tag/')
-class UsuarioTagController(Resource):
-    @ns.marshal_with(tag_m)
-    @ns.response(200, 'Lista de tags de interesse de um usuario é retornada')
-    def get(self, id):
-        """Retorna a lista das tags de interesse de uma pessoa pelo ID"""
-        usuario = Usuario.query.filter_by(id_usuario=id).first()
-        abort_if_none(usuario, 404, 'Não achado')
-        return usuario.interesses
-
-
-@ns.route('/usuario/<int:id_u>/tag/<int:id_t>')
-class UsuarioTagController(Resource):
-    @ns.response(200, 'Adiciona uma tag como interesse de um usuario')
-    def post(self, id_u, id_t):
-        """Adiciona uma tag como interesse de um usuario pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
-        abort_if_none(tag, 404, 'Não achado')
-        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
-        abort_if_none(usuario, 404, 'Não achado')
-        usuario.interesses.append(tag)
-        db.session.commit()
-        return msg('Sucesso!')
-
-    @ns.response(200, 'Uma tag é removida do interesse de um usuario')
-    def delete(self, id_u, id_t):
-        """Remove uma tag de interesse de um usuario pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
-        abort_if_none(tag, 404, 'Não achado')
-        usuario = Usuario.query.filter_by(id_usuario=id_u).first()
-        abort_if_none(usuario, 404, 'Não achado')
-        usuario.interesses.remove(tag)
-        db.session.commit()
-        return msg('Sucesso!')
-
-
-@ns.route('/usuario/<int:id>/interacao')
-class InteracaoController(Resource):
-    @ns.marshal_with(interacao_m)
-    @ns.response(200, 'lista de interações do usuário é retornada')
-    def get(self, id):
-        """Retorna a lista das interacoes de uma pessoa pelo ID"""
-        interacoes = Interacao.query.filter_by(usuario_id=id).all()
-        abort_if_none(interacoes, 404, 'Não achado')
-        return interacoes
-
-
-@ns.route('/usuario/interacao')
-@ns.response(404, 'Erro')
-class InteracaoController(Resource):
-    @ns.expect(interacao_m)
-    @ns.response(200, 'Cadastra interação de um usuário com um local')
-    def post(self):
-        """Cria uma nova interação entre um usuário e um local"""
-        i = Interacao()
-        fill_object(i, request.json)
-        db.session.add(i)
-        try:
-            db.session.commit()
-        except Exception as e:
-            abort(404, e.__str__())
-        return msg('Sucesso!')
 
 
 @ns.route('/local/<int:id>')
@@ -279,56 +208,3 @@ class TagPostController(Resource):
             abort(404, e.__str__())
 
         return msg(tg.id_tag, 'id')
-
-
-@ns.route('/cidade/<int:id>')
-@ns.response(404, 'Não encontrado')
-class CidadeController(Resource):
-    @ns.marshal_with(local_m)
-    @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
-    def get(self, id):
-        """Retorna uma lista de locais de uma cidade pelo ID"""
-        ls = Local.query \
-            .filter(Local.cidade_id == id) \
-            .all()
-        abort_if_none(ls, 404, 'Não achado')
-        return ls
-
-
-@ns.route('/local/<int:id>/tag/')
-@ns.response(404, 'Não encontrado')
-class LocalTagController(Resource):
-    @ns.marshal_with(tag_m)
-    @ns.response(200, 'Lista de tags de um local é retornada')
-    def get(self, id):
-        """Retorna a lista das tags de um local pelo ID"""
-        local = Local.query.filter_by(id_local=id).first()
-        abort_if_none(local, 404, 'Não achado')
-        return local.tags
-
-
-@ns.route('/local/<int:id_l>/tag/<int:id_t>')
-@ns.response(404, 'Não encontrado')
-class LocalTagController(Resource):
-    @ns.response(200, 'Uma tag é adicionada a um local')
-    def post(self, id_l, id_t):
-        """Adiciona uma tag a um local pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
-        abort_if_none(tag, 404, 'Não achado')
-        local = Local.query.filter_by(id_local=id_l).first()
-        abort_if_none(local, 404, 'Não achado')
-        local.tags.append(tag)
-        db.session.commit()
-        return msg('Sucesso!')
-
-
-    @ns.response(200, 'Uma tag é removida de um local')
-    def delete(self, id_l, id_t):
-        """Remove uma tag de um local pelos ID's"""
-        tag = Tag.query.filter_by(id_tag=id_t).first()
-        abort_if_none(tag, 404, 'Não achado')
-        local = Local.query.filter_by(id_local=id_l).first()
-        abort_if_none(local, 404, 'Não achado')
-        local.tags.remove(tag)
-        db.session.commit()
-        return msg('Sucesso!')
