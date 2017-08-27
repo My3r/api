@@ -2,7 +2,7 @@ from flask import request, Blueprint
 from flask_restplus import Resource, Namespace, fields, abort
 
 from app import db
-from app.mod_core.models import Usuario, Local, Tag, Interacao
+from app.mod_core.models import Usuario, Local, Tag, Interacao, Cidade
 from app.utils import abort_if_none, fill_object, msg
 
 # Define the blueprint: 'auth', set its url prefix: app.url/core
@@ -15,6 +15,21 @@ interacao_m = ns.model('interacao', {
     'local_id': fields.Integer,
     'like': fields.Boolean,
     'data': fields.Date
+})
+
+
+local_m_t = ns.model('local', {
+    'id_local': fields.Integer,
+    'nome': fields.String,
+    'descricao': fields.String,
+    'endereço': fields.String,
+    'path_foto': fields.String,
+    'lat': fields.Float,
+    'lng': fields.Float,
+    'instagram_1': fields.String,
+    'instagram_2': fields.String,
+    'instagram_3': fields.String,
+    'tags': fields.List(fields.String)
 })
 
 
@@ -58,3 +73,25 @@ class InteracaoController(Resource):
         except Exception as e:
             abort(404, e.__str__())
         return msg('Sucesso!')
+
+
+@ns.route('/<int:id_usuario>/cidade/<int:id_cidade>')
+@ns.response(404, 'Não encontrado')
+class InteracaoLocalController(Resource):
+    @ns.marshal_with(local_m_t)
+    @ns.response(200, 'Lista de locais com interação positiva do usuário é retornada')
+    def get(self, id_usuario, id_cidade):
+        """Retorna a lista de locais com interação positiva do usuario pelos ID's"""
+        cidade = Cidade.query.filter_by(id_cidade=id_cidade).first()
+        abort_if_none(cidade, 404, 'Não achado')
+        interacoes = Interacao.query.filter_by(usuario_id=id_usuario).all()
+        abort_if_none(interacoes, 404, 'Não achado')
+        locais_interacoes = []
+        for interacao in interacoes:
+            if interacao.like:
+                locais_interacoes.append(interacao.local)
+
+        locais_da_cidade = [local for local in cidade.locais if local in locais_interacoes]
+        for i in range(0, len(locais_da_cidade)):
+            locais_da_cidade[i] = Local.query.filter_by(id_local=locais_da_cidade[i].id_local).first()
+        return locais_da_cidade
