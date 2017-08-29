@@ -1,11 +1,11 @@
 # Statement for enabling the development environment
 # Enabling the development environment
-DEBUG = True
-DB_USER = 'postgres'
-DB_PASS = 'postgres'
-DB_HOST = 'localhost'
-# DB_PORT = '80'
-DB_NAME = 'my3r'
+# DEBUG = True
+# DB_USER = 'postgres'
+# DB_PASS = 'postgres'
+# DB_HOST = 'localhost'
+# # DB_PORT = '80'
+# DB_NAME = 'my3r'
 
 DB_HOST = "ec2-23-23-225-12.compute-1.amazonaws.com"
 DB_PORT = "5432"
