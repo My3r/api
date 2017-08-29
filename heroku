@@ -1,0 +1,19 @@
+https://devcenter.heroku.com/articles/getting-started-with-python
+http://www.marinamele.com/2013/12/how-to-set-django-app-on-heroku-part-i.html
+
+
+heroku git:remote -a my3r
+git push heroku master
+heroku ps:scale web=1
+heroku open
+heroku logs --tail
+heroku local web
+
+heroku addons
+heroku config
+heroku pg
+heroku run python manage.py makemigrations
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+heroku run python manage.py collectstatic --noinput;
+heroku pg:psql

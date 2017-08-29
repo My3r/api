@@ -7,6 +7,12 @@ DB_HOST = 'localhost'
 # DB_PORT = '80'
 DB_NAME = 'my3r'
 
+DB_HOST = "ec2-23-23-225-12.compute-1.amazonaws.com"
+DB_PORT = "5432"
+DB_USER = "vxvbyvagnjoblp"
+DB_PASS = "39b8c9d6d9b7b22121edd0cd4abeb106454cd6157cf22ade266f7c920a2ae6ed"
+DB_NAME = "d87hs6012pbvdm"
+
 # Define the application directory
 import os
 
@@ -14,7 +20,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
 # SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'postgres://' + DB_USER + ':' + DB_PASS + '@' + DB_HOST + '/' + DB_NAME
+SQLALCHEMY_DATABASE_URI = 'postgres://'+DB_USER+':'+DB_PASS+'@'+DB_HOST+':'+DB_PORT+'/'+DB_NAME
 DATABASE_CONNECT_OPTIONS = {}
 
 # Application threads. A common general assumption is
