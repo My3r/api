@@ -62,3 +62,5 @@ target/
 config\.py
 
 migrations/
+
+l_env/
