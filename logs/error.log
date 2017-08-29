@@ -1,0 +1,771 @@
+[2017-08-27 03:09:18,094] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/cidade/1/local/ [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 185, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'id_cidade'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 235, in get
+    .filter(Local.cidade.id_cidade == id) \
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 193, in __getattr__
+    key)
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Local.cidade has an attribute 'id_cidade'
+[2017-08-27 03:14:15,170] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/cidade/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 185, in __getattr__
+    return getattr(self.comparator, key)
+AttributeError: 'Comparator' object has no attribute 'pais_id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 235, in get
+    .filter(Local.cidade.pais_id == id) \
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 193, in __getattr__
+    key)
+AttributeError: Neither 'InstrumentedAttribute' object nor 'Comparator' object associated with Local.cidade has an attribute 'pais_id'
+[2017-08-27 03:35:17,834] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/1/tag/ [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 122, in get
+    return usuario.tags
+AttributeError: 'Usuario' object has no attribute 'tags'
+[2017-08-27 03:36:07,035] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/1/tag/1 [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 138, in post
+    return msg(usuario.id_local, 'id_local')
+AttributeError: 'Usuario' object has no attribute 'id_local'
+[2017-08-27 05:26:54,979] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/interacao [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+TypeError: post() missing 2 required positional arguments: 'id_u' and 'id_d'
+[2017-08-27 05:35:13,263] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/1/interacao [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1054, "Unknown column 'interacao.data' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 164, in get
+    interacoes = Interacao.query.filter_by(usuario_id=id).all()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2703, in all
+    return list(self)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2855, in __iter__
+    return self._execute_and_instances(context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2878, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\sql\elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1189, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.InternalError: (pymysql.err.InternalError) (1054, "Unknown column 'interacao.data' in 'field list'") [SQL: 'SELECT interacao.usuario_id AS interacao_usuario_id, interacao.local_id AS interacao_local_id, interacao.`like` AS interacao_like, interacao.data AS interacao_data \nFROM interacao \nWHERE interacao.usuario_id = %(usuario_id_1)s'] [parameters: {'usuario_id_1': 1}]
+[2017-08-27 05:35:39,915] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/1/interacao [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1054, "Unknown column 'interacao.data' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 164, in get
+    interacoes = Interacao.query.filter_by(usuario_id=id).all()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2703, in all
+    return list(self)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2855, in __iter__
+    return self._execute_and_instances(context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\query.py", line 2878, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\sql\elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1189, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.InternalError: (pymysql.err.InternalError) (1054, "Unknown column 'interacao.data' in 'field list'") [SQL: 'SELECT interacao.usuario_id AS interacao_usuario_id, interacao.local_id AS interacao_local_id, interacao.`like` AS interacao_like, interacao.data AS interacao_data \nFROM interacao \nWHERE interacao.usuario_id = %(usuario_id_1)s'] [parameters: {'usuario_id_1': 1}]
+[2017-08-27 05:37:13,956] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/interacao [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1364, "Field 'usuario_id' doesn't have a default value")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 181, in post
+    db.session.commit()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\scoping.py", line 157, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 906, in commit
+    self.transaction.commit()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 461, in commit
+    self._prepare_impl()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 441, in _prepare_impl
+    self.session.flush()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2171, in flush
+    self._flush(objects)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2291, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+    raise value
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2255, in _flush
+    flush_context.execute()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 389, in execute
+    rec.execute(self)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 548, in execute
+    uow
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\persistence.py", line 181, in save_obj
+    mapper, table, insert)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\persistence.py", line 835, in _emit_insert_statements
+    execute(statement, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\sql\elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1189, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.InternalError: (pymysql.err.InternalError) (1364, "Field 'usuario_id' doesn't have a default value") [SQL: 'INSERT INTO interacao (`like`, data) VALUES (%(like)s, %(data)s)'] [parameters: {'like': 1, 'data': '2017-08-27'}]
+[2017-08-27 05:39:07,898] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/interacao [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '1-1' for key 'PRIMARY'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 181, in post
+    db.session.commit()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\scoping.py", line 157, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 906, in commit
+    self.transaction.commit()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 461, in commit
+    self._prepare_impl()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 441, in _prepare_impl
+    self.session.flush()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2171, in flush
+    self._flush(objects)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2291, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 187, in reraise
+    raise value
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\session.py", line 2255, in _flush
+    flush_context.execute()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 389, in execute
+    rec.execute(self)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 548, in execute
+    uow
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\persistence.py", line 181, in save_obj
+    mapper, table, insert)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\persistence.py", line 799, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 945, in execute
+    return meth(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\sql\elements.py", line 263, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1053, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1189, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1402, in _handle_dbapi_exception
+    exc_info
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\util\compat.py", line 186, in reraise
+    raise value.with_traceback(tb)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\base.py", line 1182, in _execute_context
+    context)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\engine\default.py", line 470, in do_execute
+    cursor.execute(statement, parameters)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 166, in execute
+    result = self._query(query)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\cursors.py", line 322, in _query
+    conn.query(q)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 856, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1057, in _read_query_result
+    result.read()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1340, in read
+    first_packet = self.connection._read_packet()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 1014, in _read_packet
+    packet.check_error()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\connections.py", line 393, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\pymysql\err.py", line 107, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1062, "Duplicate entry '1-1' for key 'PRIMARY'") [SQL: 'INSERT INTO interacao (usuario_id, local_id, `like`, data) VALUES (%(usuario_id)s, %(local_id)s, %(like)s, %(data)s)'] [parameters: {'usuario_id': 1, 'local_id': 1, 'like': 0, 'data': '2017-08-27'}]
+[2017-08-27 06:38:32,162] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 11:04:15,019] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 11:04:15,035] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 12:05:46,389] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /local/cidade/1/usuario/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+TypeError: get() got an unexpected keyword argument 'id_cidadel'
+[2017-08-27 12:14:31,674] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /local/cidade/1/usuario/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_local\controllers.py", line 101, in get
+    tags_complementares[i] = [tag for tag in locais_disponiveis[i].tags if tag not in usuario.interesses]
+IndexError: list assignment index out of range
+[2017-08-27 12:26:41,005] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /local/cidade/1/usuario/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 317, in wrapper
+    return self.make_response(data, code, headers=headers)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 338, in make_response
+    resp = self.representations[mediatype](data, *args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\representations.py", line 22, in output_json
+    dumped = dumps(data, **settings) + "\n"
+  File "C:\Program Files (x86)\Python36-32\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Program Files (x86)\Python36-32\lib\json\encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "C:\Program Files (x86)\Python36-32\lib\json\encoder.py", line 428, in _iterencode
+    yield from _iterencode_list(o, _current_indent_level)
+  File "C:\Program Files (x86)\Python36-32\lib\json\encoder.py", line 325, in _iterencode_list
+    yield from chunks
+  File "C:\Program Files (x86)\Python36-32\lib\json\encoder.py", line 437, in _iterencode
+    o = _default(o)
+  File "C:\Program Files (x86)\Python36-32\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Local' is not JSON serializable
+[2017-08-27 13:03:54,644] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 13:07:01,832] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 13:23:53,909] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 13:41:26,278] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:41:33,371] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:41:33,969] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:44:01,545] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:44:04,788] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:49:42,798] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_core\controllers.py", line 105, in post
+    fill_object(us, request.json)
+  File "D:/Documents/Prog/my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 13:50:35,362] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_core\controllers.py", line 105, in post
+    request = request
+UnboundLocalError: local variable 'request' referenced before assignment
+[2017-08-27 13:52:08,364] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_core\controllers.py", line 105, in post
+    request = request
+UnboundLocalError: local variable 'request' referenced before assignment
+[2017-08-27 13:53:25,252] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_core\controllers.py", line 105, in post
+    request = request
+UnboundLocalError: local variable 'request' referenced before assignment
+[2017-08-27 13:55:33,197] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario [POST]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:/Documents/Prog/my3r\app\mod_core\controllers.py", line 107, in post
+    fill_object(us, json)
+  File "D:/Documents/Prog/my3r\app\utils.py", line 9, in fill_object
+    for attr, value in dictio.items():
+AttributeError: 'NoneType' object has no attribute 'items'
+[2017-08-27 14:52:40,081] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 14:54:29,457] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 15:02:16,825] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /interacao1/cidade/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+TypeError: get() got an unexpected keyword argument 'id_cidade'
+[2017-08-27 15:02:56,190] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /interacao/1/cidade/1 [GET]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\marshalling.py", line 101, in wrapper
+    resp = f(*args, **kwargs)
+TypeError: get() got an unexpected keyword argument 'id_cidade'
+[2017-08-27 15:11:34,728] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/usuario/1/limpar [DELETE]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 244, in delete
+    for interacao in us.interacao:
+AttributeError: 'Usuario' object has no attribute 'interacao'
+[2017-08-27 16:05:47,067] {D:\Documents\Prog\my3r\app\__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-27 16:09:04,363] {D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py:1560} ERROR - Exception on /core/local/12 [PUT]
+Traceback (most recent call last):
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\api.py", line 313, in wrapper
+    resp = resource(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask\views.py", line 84, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\flask_restplus\resource.py", line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "D:\Documents\Prog\my3r\app\mod_core\controllers.py", line 140, in put
+    fill_object(lc, request.json)
+  File "D:\Documents\Prog\my3r\app\utils.py", line 10, in fill_object
+    setattr(obj, str(attr), value)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 224, in __set__
+    instance_dict(instance), value, None)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 1081, in set
+    new_values, old_collection, new_collection)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\collections.py", line 762, in bulk_replace
+    appender(member)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\collections.py", line 1045, in append
+    item = __set(self, item, _sa_initiator)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\collections.py", line 1017, in __set
+    item = executor.fire_append_event(item, _sa_initiator)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\collections.py", line 680, in fire_append_event
+    item, initiator)
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\attributes.py", line 951, in fire_append_event
+    initiator or self._append_token or self._init_append_token())
+  File "D:\Documents\Prog\my3r\env\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 43, in append
+    item_state = attributes.instance_state(item)
+AttributeError: 'str' object has no attribute '_sa_instance_state'
+[2017-08-29 17:18:45,119] {/media/rodrigondec/Dados/Documents/Prog/my3r/app/__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-29 17:18:45,188] {/media/rodrigondec/Dados/Documents/Prog/my3r/app/__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-29 17:19:20,341] {/media/rodrigondec/Dados/Documents/Prog/my3r/app/__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-29 17:19:20,377] {/media/rodrigondec/Dados/Documents/Prog/my3r/app/__init__.py:43} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-29 17:42:43,102] {/home/rodrigondec/Documents/Prog/my3r/app/__init__.py:46} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
+[2017-08-29 17:42:43,187] {/home/rodrigondec/Documents/Prog/my3r/app/__init__.py:46} ERROR - 404 Not Found: The requested URL was not found on the server.  If you entered the URL manually please check your spelling and try again.
