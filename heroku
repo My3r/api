@@ -12,8 +12,9 @@ heroku local web
 heroku addons
 heroku config
 heroku pg
-heroku run python manage.py makemigrations
-heroku run python manage.py migrate
+heroku run python manage.py db init
+heroku run python manage.py db migrate
+heroku run python manage.py db upgrade
 heroku run python manage.py createsuperuser
 heroku run python manage.py collectstatic --noinput;
 heroku pg:psql
