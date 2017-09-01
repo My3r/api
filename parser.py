@@ -61,8 +61,8 @@ tags = sorted(set(tags))
 for tag in tags:
     t = Tag()
     t.nome = tag
-    # db.session.add(t)
-# db.session.commit()
+    db.session.add(t)
+db.session.commit()
 
 
 
@@ -76,8 +76,8 @@ for local in locais:
     for tag in local['tags']:
         l.tags.append(Tag.query.filter_by(nome=tag).first())
 
-    # db.session.add(l)
-# db.session.commit()
+    db.session.add(l)
+db.session.commit()
 
 pais_cidade = []
 
@@ -95,8 +95,8 @@ for tupla in pais_cidade:
     c = Cidade()
     c.nome = tupla[0]
     p.cidades.append(c)
-    # db.session.add(p)
-# db.session.commit()
+    db.session.add(p)
+db.session.commit()
 
 for local in locais2:
     l = Local()
@@ -108,8 +108,8 @@ for local in locais2:
     for tag in local['tags']:
         l.tags.append(Tag.query.filter_by(nome=tag).first())
 
-    # db.session.add(l)
-# db.session.commit()
+    db.session.add(l)
+db.session.commit()
 
 
 with open("Local - Religioso.csv", 'r', encoding='utf-8') as f:
@@ -140,5 +140,5 @@ for local in locais3:
     for tag in local['tags']:
         l.tags.append(Tag.query.filter_by(nome=tag).first())
 
-    # db.session.add(l)
-# db.session.commit()
+    db.session.add(l)
+db.session.commit()
