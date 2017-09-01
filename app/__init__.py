@@ -1,10 +1,12 @@
 # Imports
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_restplus import Api
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token
+from flask_jwt_extended import JWTManager
+from jwt.exceptions import ExpiredSignatureError
+from flask_jwt_extended.exceptions import NoAuthorizationError
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -39,11 +41,20 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 
-# Sample HTTP error handling
-@app.errorhandler(404)
-def not_found(error):
-    app.logger.error(error)
-    return error
+@api.errorhandler(ExpiredSignatureError)
+def handler_expired_token(error):
+    return jsonify({
+        'status': 401,
+        'message': ''
+    }), 200
+
+@api.errorhandler(NoAuthorizationError)
+def handler_no_token(error):
+    return jsonify({
+        'status': 401,
+        'message': ''
+    }), 200
+
 
 from app.mod_core import models
 # from app.mod_auth import models
