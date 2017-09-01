@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restplus import Resource, Namespace, fields
+from flask_jwt_extended import jwt_required
 
 from app import db
 from app.mod_core.models import Usuario, Local, Tag, Cidade
@@ -10,7 +11,7 @@ mod_local = Blueprint('local', __name__, url_prefix='/local')
 ns = Namespace('local', 'Operações de local e processamento')
 
 
-local_m_t = ns.model('local', {
+local_m_t = ns.model('local_m_t', {
     'id_local': fields.Integer,
     'nome': fields.String,
     'descricao': fields.String,
@@ -24,13 +25,14 @@ local_m_t = ns.model('local', {
     'tags': fields.List(fields.String)
 })
 
-tag_m = ns.model('tag', {
+tag_m = ns.model('tag_m', {
     'id_tag': fields.Integer,
     'nome': fields.String
 })
 
 
 @ns.route('/cidade/<int:id_cidade>')
+@ns.param('id_cidade', 'ID da cidade')
 @ns.response(404, 'Não encontrado')
 class CidadeController(Resource):
     @ns.marshal_with(local_m_t)
@@ -45,6 +47,7 @@ class CidadeController(Resource):
 
 
 @ns.route('/<int:id_local>')
+@ns.param('id_local', 'ID do local')
 @ns.response(404, 'Não encontrado')
 class LocalTagController(Resource):
     @ns.marshal_with(tag_m)
@@ -57,6 +60,8 @@ class LocalTagController(Resource):
 
 
 @ns.route('/<int:id_local>/tag/<int:id_tag>')
+@ns.param('id_local', 'ID do local')
+@ns.param('id_tag', 'ID da tag')
 @ns.response(404, 'Não encontrado')
 class LocalTagController(Resource):
     @ns.response(200, 'Uma tag é adicionada a um local')
@@ -85,9 +90,11 @@ class LocalTagController(Resource):
 
 @ns.route('/cidade/<int:id_cidade>/usuario/<int:id_usuario>')
 @ns.response(404, 'Não encontrado')
+@ns.header('Authorization', 'The authorization token')
 class LocalInteresseController(Resource):
     @ns.marshal_with(local_m_t)
     @ns.response(200, 'Lista de locais ordenado decrescente por interesse do usuário')
+    @jwt_required
     def get(self, id_cidade, id_usuario):
         """Retorna lista de locais ordenado por quantidade de tags de interesse do usuário"""
         usuario = Usuario.query.filter_by(id_usuario=id_usuario).first()
