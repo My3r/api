@@ -1,5 +1,6 @@
 from flask import request, Blueprint
 from flask_restplus import Resource, Namespace, fields, abort
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app import db
 from app.mod_core.models import Usuario, Local, Tag, Interacao
@@ -9,14 +10,14 @@ from app.utils import abort_if_none, fill_object, msg
 mod_core = Blueprint('core', __name__, url_prefix='/core')
 ns = Namespace('core', 'Operações core. CRUD de Usuario, Local e Tag')
 
-user_m = ns.model('usuario', {
+usuario_m = ns.model('usuario_m', {
     'id_usuario': fields.Integer,
     'nome': fields.String,
     'email': fields.String,
     'data_nascimento': fields.Date,
     'path_foto': fields.String
 })
-user_m_expect = ns.model('usario', {
+usuario_m_expect = ns.model('usuario_m_expect', {
     'nome': fields.String,
     'email': fields.String,
     'data_nascimento': fields.Date,
@@ -24,7 +25,7 @@ user_m_expect = ns.model('usario', {
     'senha': fields.String
 })
 
-local_m = ns.model('local', {
+local_m = ns.model('local_m', {
     'id_local': fields.Integer,
     'nome': fields.String,
     'descricao': fields.String,
@@ -36,7 +37,7 @@ local_m = ns.model('local', {
     'instagram_2': fields.String,
     'instagram_3': fields.String
 })
-local_m_expect = ns.model('local', {
+local_m_expect = ns.model('local_m_expect', {
     'nome': fields.String,
     'descricao': fields.String,
     'endereço': fields.String,
@@ -48,34 +49,38 @@ local_m_expect = ns.model('local', {
     'instagram_3': fields.String
 })
 
-tag_m = ns.model('tag', {
+tag_m = ns.model('tag_m', {
     'id_tag': fields.Integer,
     'nome': fields.String
 })
-tag_m_expect = ns.model('tag', {
+tag_m_expect = ns.model('tag_m_expect', {
     'nome': fields.String
 })
 
 
-@ns.route('/usuario/<int:id_usuario>')
+@ns.route('/usuario')
 @ns.response(404, 'Não encontrado')
 class UsuarioController(Resource):
-    @ns.marshal_with(user_m)
-    @ns.response(200, 'Retorna o model usuario no corpo da resposta')
-    def get(self, id_usuario):
+    @ns.header('Authorization', 'The authorization token')
+    @ns.response(200, 'Retorna o model usuario no corpo da resposta', usuario_m)
+    @ns.marshal_with(usuario_m)
+    @jwt_required
+    def get(self):
         """Retorna um usuário pelo ID"""
         us = Usuario.query \
-            .filter(Usuario.id_usuario == id_usuario) \
+            .filter(Usuario.id_usuario == get_jwt_identity()) \
             .first()
         abort_if_none(us, 404, 'Não achado')
         return us
 
+    @ns.header('Authorization', 'The authorization token')
     @ns.response(200, 'Usuario atualizado')
-    @ns.expect(user_m_expect)
-    def put(self, id_usuario):
+    @ns.expect(usuario_m_expect)
+    @jwt_required
+    def put(self):
         """Atualiza um usuário pelo ID"""
         us = Usuario.query\
-            .filter(Usuario.id_usuario == id_usuario)\
+            .filter(Usuario.id_usuario == get_jwt_identity())\
             .first()
         abort_if_none(us, 404, 'Não achado')
 
@@ -84,21 +89,10 @@ class UsuarioController(Resource):
 
         return msg('success!')
 
-
-@ns.route('/usuario')
-@ns.response(404, 'Erro')
-class UsuarioPostController(Resource):
-    @ns.response(400, 'Um dos argumentos está mal formado')
-    @ns.response(200, 'Retorna uma lista de usuarios com o critério passado', user_m)
-    @ns.marshal_with(user_m)
-    def get(self):
-        """Retorna uma lista de usuários"""
-        return Usuario.query.all()
-
     @ns.response(404, 'Erro inesperado')
     @ns.response(400, 'O modelo está mal formado')
     @ns.response(200, 'Usuario inserido')
-    @ns.expect(user_m_expect)
+    @ns.expect(usuario_m_expect)
     def post(self):
         """Cria um novo usuário"""
         us = Usuario()
@@ -114,11 +108,26 @@ class UsuarioPostController(Resource):
         return msg(us.id_usuario, 'id')
 
 
+# @ns.route('/usuarios')
+# @ns.response(404, 'Erro')
+# @ns.header('Authorization', 'The authorization token')
+# class UsuarioPostController(Resource):
+#     @ns.response(400, 'Um dos argumentos está mal formado')
+#     @ns.response(200, 'Retorna uma lista de usuarios com o critério passado', usuario_m)
+#     @ns.marshal_with(usuario_m)
+#     @jwt_required
+#     def get(self):
+#         """Retorna uma lista de usuários"""
+#         return Usuario.query.all()
+
+
+
 @ns.route('/local/<int:id_local>')
+@ns.param('id_local', 'ID do local')
 @ns.response(404, 'Não encontrado')
 class LocalController(Resource):
-    @ns.marshal_with(local_m)
     @ns.response(200, 'Retorna o model local no corpo da resposta')
+    @ns.marshal_with(local_m)
     def get(self, id_local):
         """Retorna um local pelo ID"""
         lc = Local.query \
@@ -158,7 +167,7 @@ class LocalPostController(Resource):
     @ns.response(200, 'Retorna uma lista de locais com o critério passado', local_m)
     @ns.marshal_with(local_m)
     def get(self):
-        """Retorna uma lista locais"""
+        """Retorna uma lista de locais"""
         return Local.query.all()
 
     @ns.response(404, 'Erro')
@@ -178,6 +187,7 @@ class LocalPostController(Resource):
 
 
 @ns.route('/tag/<int:id_tag>')
+@ns.param('id_tag', 'ID da tag')
 @ns.response(404, 'Não encontrado')
 class TagController(Resource):
     @ns.marshal_with(tag_m)
@@ -230,9 +240,12 @@ class TagPostController(Resource):
 
 
 @ns.route('/usuario/<int:id_usuario>/limpar')
+@ns.param('id_usuario', 'ID do usuario')
 @ns.response(404, 'Não encontrado')
+@ns.header('Authorization', 'The authorization token')
 class LimparUsuarioController(Resource):
     @ns.response(200, 'Usuario resetado')
+    @jwt_required
     def delete(self, id_usuario):
         """Limpa lista de interesses e interações do usuario pelo ID"""
         us = Usuario.query \
